@@ -367,7 +367,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         boolean isTV14 = "TV-14".equalsIgnoreCase(p.getAgeCertificate());
         if (temCrime && isTV14) lista.add(p);
         lista.addAll(top10CrimeTv14PorTmdb(no.getFilhoDireito()));
-        lista.sort((a, b) -> Double.compare(b.getTmdbScore(), a.getTmdbScore()));
+        lista.sort((a, b) -> Double.compare(b.getTmdbPopularity(), a.getTmdbPopularity()));
         return lista;
     }
 
@@ -434,7 +434,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return lista;
     }
 
-//utilizando o método emOrdem
+    //utilizando o método emOrdem
 
     public List<ProgramaNetFlix> worstReviewByTmdb() {
         return worstReviewByTmdb(raiz);
@@ -451,7 +451,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         lista.sort((a, b) -> Double.compare(a.getTmdbScore(), b.getTmdbScore()));
         return lista;
     }
-//Inserir um novo programa na BST
+    //Inserir um novo programa na BST
 
     public void insertProgramaNetflix() {
         Scanner sc = new Scanner(System.in);
@@ -462,17 +462,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         System.out.print("Digite o tipo (MOVIE/SHOW): ");
         String showType = sc.nextLine();
 
-        System.out.print("Digite a descricao: ");
-        String descricao = sc.nextLine();
-
         System.out.print("Digite o ano de lancamento: ");
         int releaseYear = Integer.parseInt(sc.nextLine().trim());
 
         System.out.print("Digite a classificacao etaria (ex: TV-14, PG-13): ");
         String ageCertificate = sc.nextLine();
-
-        System.out.print("Digite a duracao em minutos (runtime): ");
-        int runtime = Integer.parseInt(sc.nextLine().trim());
 
         System.out.print("Digite os generos separados por virgula (ex: crime, drama): ");
         List<String> generos = new ArrayList<>();
@@ -490,9 +484,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         System.out.print("Digite o numero de temporadas (0 para filmes): ");
         double temporadas = Double.parseDouble(sc.nextLine().trim());
-
-        System.out.print("Digite o ID do IMDB (ex: tt1234567): ");
-        String imdbId = sc.nextLine();
 
         System.out.print("Digite a nota IMDB (0.0 a 10.0): ");
         double imdbScore = Double.parseDouble(sc.nextLine().trim());
@@ -531,7 +522,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         String id = prefixo + (maiorNumero + 1);
 
-        ProgramaNetFlix novo = new ProgramaNetFlix(id, titulo, showType, descricao, releaseYear, ageCertificate, runtime, generos, productionCountries, temporadas, imdbId, imdbScore, imdbVotes, tmdbPopularity, tmdbScore);
+        ProgramaNetFlix novo = new ProgramaNetFlix(id, titulo, showType, releaseYear, ageCertificate, generos, productionCountries, temporadas, imdbScore, imdbVotes, tmdbPopularity, tmdbScore);
         insert((T) novo);
         System.out.println("Programa inserido com sucesso! ID gerado: " + id);
     }
@@ -601,21 +592,18 @@ public class BinarySearchTree<T extends Comparable<T>> {
         coletarEmOrdem(raiz, programas);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomeArquivo, false))) {
-            bw.write("id,title,type,description,release_year,age_certification,runtime,genres,production_countries,seasons,imdb_id,imdb_score,imdb_votes,tmdb_popularity,tmdb_score");
+            bw.write("id,title,type,release_year,age_certification,genres,production_countries,seasons,imdb_score,imdb_votes,tmdb_popularity,tmdb_score");
             bw.newLine();
             for (ProgramaNetFlix p : programas) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(escaparCsv(p.getId())).append(",");
                 sb.append(escaparCsv(p.getTitulo())).append(",");
                 sb.append(escaparCsv(p.getShowType())).append(",");
-                sb.append(escaparCsv(p.getDescricao())).append(",");
                 sb.append(p.getReleaseYear()).append(",");
                 sb.append(escaparCsv(p.getAgeCertificate())).append(",");
-                sb.append(p.getRuntime()).append(",");
                 sb.append(listaParaArrayCsv(p.getGeneros())).append(",");
                 sb.append(listaParaArrayCsv(p.getProductionCountries())).append(",");
                 sb.append(p.getTemporadas()).append(",");
-                sb.append(escaparCsv(p.getImdbId())).append(",");
                 sb.append(p.getImdbScore()).append(",");
                 sb.append(p.getImdbVotes()).append(",");
                 sb.append(p.getTmdbPopularity()).append(",");

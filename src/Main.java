@@ -73,7 +73,7 @@ public class Main {
                                     List<ProgramaNetFlix> resultado = bst.top10CrimeTv14PorTmdb();
                                     for (int i = 0; i < Math.min(resultado.size(), 11); i++) {
                                         System.out.println((i + 1) + ". " + resultado.get(i).getTitulo() +
-                                                " (TMDB Score: " + resultado.get(i).getTmdbScore() + ")");
+                                                " (TMDB Popularity: " + resultado.get(i).getTmdbPopularity() + ")");
                                     }
                                 } catch (Exception e) {
                                     System.out.println("Erro na análise: " + e.getMessage());

@@ -9,14 +9,11 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
     private String id;
     private String titulo;
     private String showType;
-    private String descricao;
     private int releaseYear;
     private String ageCertificate;
-    private int runtime;
     private List<String> generos;
     private List<String> productionCountries;
     private double temporadas;
-    private String imdbId;
     private double imdbScore;
     private double imdbVotes;
     private double tmdbPopularity;
@@ -24,22 +21,19 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
 
     public ProgramaNetFlix() {}
 
-    public ProgramaNetFlix(String id, String titulo, String showType, String descricao,
-                           int releaseYear, String ageCertificate, int runtime,
+    public ProgramaNetFlix(String id, String titulo, String showType,
+                           int releaseYear, String ageCertificate,
                            List<String> generos, List<String> productionCountries,
-                           double temporadas, String imdbId, double imdbScore,
+                           double temporadas, double imdbScore,
                            double imdbVotes, double tmdbPopularity, double tmdbScore) {
         this.id = id;
         this.titulo = titulo;
         this.showType = showType;
-        this.descricao = descricao;
         this.releaseYear = releaseYear;
         this.ageCertificate = ageCertificate;
-        this.runtime = runtime;
         this.generos = generos;
         this.productionCountries = productionCountries;
         this.temporadas = temporadas;
-        this.imdbId = imdbId;
         this.imdbScore = imdbScore;
         this.imdbVotes = imdbVotes;
         this.tmdbPopularity = tmdbPopularity;
@@ -70,13 +64,6 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
         this.showType = showType;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 
     public int getReleaseYear() {
         return releaseYear;
@@ -94,13 +81,6 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
         this.ageCertificate = ageCertificate;
     }
 
-    public int getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
-    }
 
     public List<String> getGeneros() {
         return generos;
@@ -126,13 +106,6 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
         this.temporadas = temporadas;
     }
 
-    public String getImdbId() {
-        return imdbId;
-    }
-
-    public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
-    }
 
     public double getImdbScore() {
         return imdbScore;
@@ -177,14 +150,11 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
                 "id='" + id + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", showType='" + showType + '\'' +
-                ", descricao='" + descricao + '\'' +
                 ", releaseYear=" + releaseYear +
                 ", ageCertificate=" + ageCertificate +
-                ", runtime=" + runtime +
                 ", generos=" + generos +
                 ", productionCountries=" + productionCountries +
                 ", temporadas=" + temporadas +
-                ", imdbId='" + imdbId + '\'' +
                 ", imdbScore=" + imdbScore +
                 ", imdbVotes=" + imdbVotes +
                 ", tmdbPopularity=" + tmdbPopularity +

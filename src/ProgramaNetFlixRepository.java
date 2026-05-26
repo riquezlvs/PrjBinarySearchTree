@@ -43,26 +43,24 @@ public class ProgramaNetFlixRepository {
                     continue;
                 }
                 String[] campos = separarCamposCsv(linha);
-                if (campos.length < 15 || algumCampoVazio(campos)) continue;
+                // Verifica se a linha tem todas as colunas esperadas e os campos obrigatorios
+                if (campos.length < 15 || camposVaziosObrigatorios(campos)) continue;
                 String id = campos[0];
                 String titulo = campos[1];
                 String showType = campos[2];
-                String descricao = campos[3];
                 int releaseYear = Integer.parseInt(campos[4].trim());
                 String ageCertificate = campos[5].trim();
-                int runtime = Integer.parseInt(campos[6].trim());
                 List<String> generos = extrairListaDoArray(campos[7]);
                 List<String> countries = extrairListaDoArray(campos[8]);
                 double temporadas = Double.parseDouble(campos[9].trim());
-                String imdbId = campos[10];
                 double imdbScore = Double.parseDouble(campos[11].trim());
                 double imdbVotes = Double.parseDouble(campos[12].trim());
                 double tmdbPopularity = Double.parseDouble(campos[13].trim());
                 double tmdbScore = Double.parseDouble(campos[14].trim());
 
-                ProgramaNetFlix p = new ProgramaNetFlix(id, titulo, showType, descricao,
-                        releaseYear, ageCertificate, runtime, generos, countries,
-                        temporadas, imdbId, imdbScore, imdbVotes, tmdbPopularity, tmdbScore);
+                ProgramaNetFlix p = new ProgramaNetFlix(id, titulo, showType,
+                        releaseYear, ageCertificate, generos, countries,
+                        temporadas, imdbScore, imdbVotes, tmdbPopularity, tmdbScore);
                 bst.insert(p);
             }
         } catch (IOException e) {
@@ -71,9 +69,17 @@ public class ProgramaNetFlixRepository {
         return bst;
     }
 
-    private boolean algumCampoVazio(String[] campos) {
-        for (String campo : campos) {
-            if (campo.trim().isEmpty()) return true;
+    /**
+     * Verifica se os campos obrigatórios (índices usados pela aplicação) estão vazios.
+     * Campos obrigatórios: id(0), title(1), type(2), release_year(4),
+     * age_certification(5), genres(7), production_countries(8), seasons(9),
+     * imdb_score(11), imdb_votes(12), tmdb_popularity(13), tmdb_score(14)
+     */
+    private boolean camposVaziosObrigatorios(String[] campos) {
+        int[] indicesObrigatorios = {0, 1, 2, 4, 5, 7, 8, 9, 11, 12, 13, 14};
+        for (int idx : indicesObrigatorios) {
+            if (idx >= campos.length) return true;
+            if (campos[idx].trim().isEmpty()) return true;
         }
         return false;
     }
