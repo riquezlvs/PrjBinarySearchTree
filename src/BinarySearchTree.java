@@ -657,8 +657,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 sb.append(escaparCsv(p.getShowType())).append(",");
                 sb.append(p.getReleaseYear()).append(",");
                 sb.append(escaparCsv(p.getAgeCertificate())).append(",");
-                sb.append(listaParaArrayCsv(p.getGeneros())).append(",");
-                sb.append(listaParaArrayCsv(p.getProductionCountries())).append(",");
+                sb.append(escaparCsv(listaParaArrayCsv(p.getGeneros()))).append(",");
+                sb.append(escaparCsv(listaParaArrayCsv(p.getProductionCountries()))).append(",");
                 sb.append(p.getTemporadas()).append(",");
                 sb.append(p.getImdbScore()).append(",");
                 sb.append(p.getImdbVotes()).append(",");
