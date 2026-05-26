@@ -353,7 +353,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    // Utilizando o método emOrdem
+    /**
+     * Retorna os programas "crime" com certificação "TV-14" ordenados
+     * por TMDB score (descendente). Esta versão pública apenas encaminha
+     * para a implementação recursiva que inicia no nó raiz.
+     * Percurso utilizado: em-ordem (in-order).
+     *
+     * @return lista de programas filtrados e ordenados
+     */
     public List<ProgramaNetFlix> top10CrimeTv14PorTmdb() {
         return top10CrimeTv14PorTmdb(raiz);
     }
@@ -372,7 +379,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
 
-    // utilizando o método pós ordem
+    /**
+     * Identifica títulos com alta nota no IMDB e poucos votos (hidden gems).
+     * Versão pública que encaminha para a implementação recursiva.
+     * Percurso utilizado: pós-ordem (post-order).
+     *
+     * @return lista de possíveis "hidden gems"
+     */
     public List<ProgramaNetFlix> topHiddenGems() {
         return topHiddenGems(raiz);
     }
@@ -388,8 +401,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
         lista.addAll(topHiddenGems(no.getFilhoDireito()));
         return lista;
     }
-    //Utilizando o método em largura
-
+    /**
+     * Retorna programas produzidos fora dos EUA em um determinado ano.
+     * A busca utiliza percurso em largura (nivel por nivel) para obter
+     * resultados independentes da ordenação da ABB.
+     *
+     * @param ano ano a ser filtrado
+     * @return lista de programas produzidos fora dos EUA no ano informado
+     */
     public List<ProgramaNetFlix> internationalProductionbyYear(int ano) {
         return internationalProductionbyYear(raiz, ano);
     }
@@ -415,8 +434,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return filtrado;
     }
 
-//utilizando o método pósOrdem
-
+    /**
+     * Identifica séries (tipo SHOW) e retorna em ordem decrescente de
+     * temporadas. A versão pública chama a implementação recursiva a partir
+     * da raiz. Percurso utilizado: pós-ordem.
+     *
+     * @return lista de séries ordenadas por temporadas
+     */
     public List<ProgramaNetFlix> moreBiggestSeries() {
         return moreBiggestSeries(raiz);
     }
@@ -434,8 +458,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return lista;
     }
 
-    //utilizando o método emOrdem
-
+    /**
+     * Retorna os programas com avaliação no TMDB (> 0) ordenados por
+     * tmdbScore ascendente (piores primeiro). Utiliza percurso em-ordem.
+     *
+     * @return lista de programas ordenada por tmdbScore crescente
+     */
     public List<ProgramaNetFlix> worstReviewByTmdb() {
         return worstReviewByTmdb(raiz);
     }
@@ -451,8 +479,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         lista.sort((a, b) -> Double.compare(a.getTmdbScore(), b.getTmdbScore()));
         return lista;
     }
-    //Inserir um novo programa na BST
-
+    /**
+     * Solicita dados do novo programa ao usuário e insere um novo nó na BST.
+     * Gera automaticamente um identificador seguindo o padrão do dataset
+     * (tsN para SHOW, tmN para MOVIE) baseado no maior número já presente.
+     */
     public void insertProgramaNetflix() {
         Scanner sc = new Scanner(System.in);
 
@@ -546,8 +577,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-//Buscar Programa especifico
-
+    /**
+     * Busca um programa pela sua chave (id) na ABB.
+     * Retorna também estatísticas simples: tempo de execução e número de comparações.
+     *
+     * @param id identificador do programa a ser buscado
+     * @return o ProgramaNetFlix encontrado ou null caso não exista
+     */
     public ProgramaNetFlix buscarPrograma(String id) {
         long inicio = System.nanoTime();
         int comparacoes = 0;
@@ -573,10 +609,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 //retorna a altura da arvore
 
+    /**
+     * Retorna a altura da ABB (profundidade máxima).
+     * A altura de uma árvore vazia é -1 por convenção nesta implementação.
+     *
+     * @return altura da árvore
+     */
     public int altura() {
         return altura(raiz);
     }
 
+    /**
+     * Calcula recursivamente a altura a partir do nó informado.
+     *
+     * @param no nó de início
+     * @return altura do sub-árvore
+     */
     private int altura(Node<T> no) {
         if (no == null) {
             return -1;
@@ -586,7 +634,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
-    //Salva as alterações no arquivo csv
+    /**
+     * Salva os registros atualmente armazenados na ABB em um arquivo CSV.
+     * Apenas os campos mantidos pelo modelo são escritos (os mesmos validados
+     * durante a leitura).
+     *
+     * @param nomeArquivo caminho/nome do arquivo de saída
+     */
     public void salvarDadosEmArquivo(String nomeArquivo) {
         List<ProgramaNetFlix> programas = new ArrayList<>();
         coletarEmOrdem(raiz, programas);
@@ -599,11 +653,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 sb.append(escaparCsv(p.getId())).append(",");
                 sb.append(escaparCsv(p.getTitulo())).append(",");
                 sb.append(escaparCsv(p.getShowType())).append(",");
+                sb.append(escaparCsv(p.getDescricao())).append(",");
                 sb.append(p.getReleaseYear()).append(",");
                 sb.append(escaparCsv(p.getAgeCertificate())).append(",");
+                sb.append(p.getRuntime()).append(",");
                 sb.append(listaParaArrayCsv(p.getGeneros())).append(",");
                 sb.append(listaParaArrayCsv(p.getProductionCountries())).append(",");
                 sb.append(p.getTemporadas()).append(",");
+                sb.append(escaparCsv(p.getImdbId())).append(",");
                 sb.append(p.getImdbScore()).append(",");
                 sb.append(p.getImdbVotes()).append(",");
                 sb.append(p.getTmdbPopularity()).append(",");
@@ -617,6 +674,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Coleta todos os programas em-ordem (in-order) e adiciona à lista fornecida.
+     * O resultado ficará ordenado de acordo com a ordem natural da chave.
+     *
+     * @param no nó atual para coleta
+     * @param lista lista de saída onde os programas serão adicionados
+     */
     private void coletarEmOrdem(Node<T> no, List<ProgramaNetFlix> lista) {
         if (no == null) return;
         coletarEmOrdem(no.getFilhoEsquerdo(), lista);
@@ -624,6 +688,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         coletarEmOrdem(no.getFilhoDireito(), lista);
     }
 
+    /**
+     * Escapa valores que contêm vírgulas, aspas ou quebras de linha para
+     * que possam ser escritos corretamente em CSV.
+     *
+     * @param valor texto a ser escapado
+     * @return valor escapado (entre aspas se necessário)
+     */
     private String escaparCsv(String valor) {
         if (valor == null) return "";
         if (valor.contains(",") || valor.contains("\"") || valor.contains("\n")) {
@@ -632,6 +703,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return valor;
     }
 
+    /**
+     * Converte uma lista de strings em uma representação compatível com o
+     * formato original do dataset (por exemplo: ['Drama','Crime']).
+     *
+     * @param lista lista de strings
+     * @return representação em formato de array com aspas simples
+     */
     private String listaParaArrayCsv(List<String> lista) {
         if (lista == null || lista.isEmpty()) return "[]";
         StringBuilder sb = new StringBuilder("[");

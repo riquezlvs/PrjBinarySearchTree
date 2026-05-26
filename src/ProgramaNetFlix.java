@@ -1,8 +1,16 @@
-/*
- * Autores: João Nascimento RA: 10748243, Levi Guerra 10748088, Guilherme Leite RA: 10739054.
- * Projeto 2 - BST com Dataset NetFlix
-*/
-
+/**
+ * Representa um registro do dataset NetFlix mapeado em memória.
+ *
+ * <p>Esta classe contém apenas os atributos necessários para as análises do
+ * projeto (identificador, título, tipo, ano, classificação, gêneros,
+ * países de produção, temporadas e métricas IMDB/TMDB). Campos do dataset
+ * originais que não são utilizados pelas análises foram removidos para
+ * simplificar o modelo.</p>
+ *
+ * Arquivo: ProgramaNetFlix.java
+ * Autores: João Nascimento RA: 10748243, Levi Guerra RA: 10748088,
+ *          Guilherme Leite RA: 10739054.
+ */
 import java.util.List;
 
 public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {

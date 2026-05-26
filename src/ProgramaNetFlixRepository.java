@@ -1,8 +1,11 @@
-/*
- * Autores: João Nascimento RA: 10748243, Levi Guerra 10748088, Guilherme Leite RA: 10739054.
- * Projeto 2 - BST com Dataset NetFlix
-*/
-
+/**
+ * Responsável pela leitura do dataset CSV e mapeamento para a
+ * estrutura de dados em memória (BST).
+ *
+ * <p>Esta classe encapsula a lógica de leitura do arquivo CSV, saneamento
+ * dos campos necessários e conversão para objetos {@link ProgramaNetFlix}.
+ * Apenas os campos usados nas análises são validados e carregados.</p>
+ */
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,12 +14,30 @@ import java.util.List;
 
 public class ProgramaNetFlixRepository {
 
+    /** Caminho do arquivo CSV a ser lido. */
     private final String caminhoArquivo;
 
+    /**
+     * Cria um repositório que lê o arquivo no caminho informado.
+     *
+     * @param caminhoArquivo nome/ caminho do arquivo CSV contendo o dataset
+     */
     public ProgramaNetFlixRepository(String caminhoArquivo) {
         this.caminhoArquivo = caminhoArquivo;
     }
 
+    /**
+     * Carrega dados do CSV para uma BST. Esta rotina:
+     * <ol>
+     *   <li>Valida a existência do arquivo</li>
+     *   <li>Lê todas as linhas</li>
+     *   <li>Ignora cabeçalho</li>
+     *   <li>Extrai e valida apenas os campos necessários para as análises</li>
+     *   <li>Descarta linhas incompletas</li>
+     * </ol>
+     *
+     * @return ABB preenchida com os registros válidos (pode ser vazia)
+     */
     public BinarySearchTree<ProgramaNetFlix> carregarDados() {
         BinarySearchTree<ProgramaNetFlix> bst = new BinarySearchTree<>();
         try {
@@ -36,7 +57,7 @@ public class ProgramaNetFlixRepository {
 
             System.out.println("Carregando " + (linhas.size() - 1) + " linhas do arquivo...");
 
-            boolean primeiraLinha = true;
+            boolean primeiraLinha = true; // pular cabeçalho
             for (String linha : linhas) {
                 if (primeiraLinha) {
                     primeiraLinha = false;
@@ -84,6 +105,13 @@ public class ProgramaNetFlixRepository {
         return false;
     }
 
+    /**
+     * Separa uma linha CSV em campos, respeitando aspas que protegem vírgulas
+     * internas (implementação simples e segura para o dataset fornecido).
+     *
+     * @param linha linha lida do arquivo CSV
+     * @return array de campos
+     */
     private String[] separarCamposCsv(String linha) {
         List<String> campos = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -103,6 +131,13 @@ public class ProgramaNetFlixRepository {
         return campos.toArray(new String[0]);
     }
 
+    /**
+     * Converte uma representação de lista (por exemplo "['Drama', 'Crime']")
+     * para uma List<String> limpa (sem colchetes e aspas).
+     *
+     * @param campo string contendo a lista no CSV
+     * @return lista de valores
+     */
     private List<String> extrairListaDoArray(String campo) {
         String limpo = campo.trim().replaceAll("^\\[|\\]$", "");
         List<String> resultado = new ArrayList<>();
