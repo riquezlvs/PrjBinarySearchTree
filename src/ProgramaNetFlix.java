@@ -1,48 +1,48 @@
-/*
- * Autores: João Nascimento RA: 10748243, Levi Guerra 10748088, Guilherme Leite RA: 10739054.
- * Projeto 2 - BST com Dataset NetFlix
-*/
-
+/**
+ * Representa um registro do dataset NetFlix mapeado em memória.
+ *
+ * <p>Esta classe contém apenas os atributos necessários para as análises do
+ * projeto (identificador, título, tipo, ano, classificação, gêneros,
+ * países de produção, temporadas e métricas IMDB/TMDB). Campos do dataset
+ * originais que não são utilizados pelas análises foram removidos para
+ * simplificar o modelo.</p>
+ *
+ * Arquivo: ProgramaNetFlix.java
+ * Autores: João Nascimento RA: 10748243, Levi Guerra RA: 10748088,
+ *          Guilherme Leite RA: 10739054.
+ */
 import java.util.List;
 
 public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
     private String id;
     private String titulo;
     private String showType;
-    private String descricao;
     private int releaseYear;
     private String ageCertificate;
-    private int runtime;
     private List<String> generos;
     private List<String> productionCountries;
     private double temporadas;
-    private String imdbId;
     private double imdbScore;
     private double imdbVotes;
-    private double tmdbPopularity;
     private double tmdbScore;
 
     public ProgramaNetFlix() {}
 
-    public ProgramaNetFlix(String id, String titulo, String showType, String descricao,
-                           int releaseYear, String ageCertificate, int runtime,
+    public ProgramaNetFlix(String id, String titulo, String showType,
+                           int releaseYear, String ageCertificate,
                            List<String> generos, List<String> productionCountries,
-                           double temporadas, String imdbId, double imdbScore,
-                           double imdbVotes, double tmdbPopularity, double tmdbScore) {
+                           double temporadas, double imdbScore,
+                           double imdbVotes, double tmdbScore) {
         this.id = id;
         this.titulo = titulo;
         this.showType = showType;
-        this.descricao = descricao;
         this.releaseYear = releaseYear;
         this.ageCertificate = ageCertificate;
-        this.runtime = runtime;
         this.generos = generos;
         this.productionCountries = productionCountries;
         this.temporadas = temporadas;
-        this.imdbId = imdbId;
         this.imdbScore = imdbScore;
         this.imdbVotes = imdbVotes;
-        this.tmdbPopularity = tmdbPopularity;
         this.tmdbScore = tmdbScore;
     }
 
@@ -70,14 +70,6 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
         this.showType = showType;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public int getReleaseYear() {
         return releaseYear;
     }
@@ -92,14 +84,6 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
 
     public void setAgeCertificate(String ageCertificate) {
         this.ageCertificate = ageCertificate;
-    }
-
-    public int getRuntime() {
-        return runtime;
-    }
-
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
     }
 
     public List<String> getGeneros() {
@@ -126,13 +110,7 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
         this.temporadas = temporadas;
     }
 
-    public String getImdbId() {
-        return imdbId;
-    }
-
-    public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
-    }
+    // imdbId removido
 
     public double getImdbScore() {
         return imdbScore;
@@ -148,14 +126,6 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
 
     public void setImdbVotes(double imdbVotes) {
         this.imdbVotes = imdbVotes;
-    }
-
-    public double getTmdbPopularity() {
-        return tmdbPopularity;
-    }
-
-    public void setTmdbPopularity(double tmdbPopularity) {
-        this.tmdbPopularity = tmdbPopularity;
     }
 
     public double getTmdbScore() {
@@ -177,17 +147,13 @@ public class ProgramaNetFlix implements Comparable<ProgramaNetFlix> {
                 "id='" + id + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", showType='" + showType + '\'' +
-                ", descricao='" + descricao + '\'' +
                 ", releaseYear=" + releaseYear +
                 ", ageCertificate=" + ageCertificate +
-                ", runtime=" + runtime +
                 ", generos=" + generos +
                 ", productionCountries=" + productionCountries +
                 ", temporadas=" + temporadas +
-                ", imdbId='" + imdbId + '\'' +
                 ", imdbScore=" + imdbScore +
                 ", imdbVotes=" + imdbVotes +
-                ", tmdbPopularity=" + tmdbPopularity +
                 ", tmdbScore=" + tmdbScore +
                 '}';
     }
