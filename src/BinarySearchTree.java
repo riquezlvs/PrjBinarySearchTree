@@ -650,17 +650,16 @@ public class BinarySearchTree<T extends Comparable<T>> {
             bw.newLine();
             for (ProgramaNetFlix p : programas) {
                 StringBuilder sb = new StringBuilder();
+                // Ordem dos campos: id,title,type,release_year,age_certification,genres,
+                // production_countries,seasons,imdb_score,imdb_votes,tmdb_popularity,tmdb_score
                 sb.append(escaparCsv(p.getId())).append(",");
                 sb.append(escaparCsv(p.getTitulo())).append(",");
                 sb.append(escaparCsv(p.getShowType())).append(",");
-                sb.append(escaparCsv(p.getDescricao())).append(",");
                 sb.append(p.getReleaseYear()).append(",");
                 sb.append(escaparCsv(p.getAgeCertificate())).append(",");
-                sb.append(p.getRuntime()).append(",");
                 sb.append(listaParaArrayCsv(p.getGeneros())).append(",");
                 sb.append(listaParaArrayCsv(p.getProductionCountries())).append(",");
                 sb.append(p.getTemporadas()).append(",");
-                sb.append(escaparCsv(p.getImdbId())).append(",");
                 sb.append(p.getImdbScore()).append(",");
                 sb.append(p.getImdbVotes()).append(",");
                 sb.append(p.getTmdbPopularity()).append(",");
